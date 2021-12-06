@@ -3,6 +3,15 @@
 class adminUser extends CI_Model {
 
 //-------------->Listar tabla<-----------------------------------------------------------------------------------------------------
+/**
+     * Proceso para listar tareas 
+     * @author Cristian Avila <?>
+     * @date 06/12/2021
+     * @method {{GET}}
+     * @param {string} name Nombre de la tarea  
+     * @return JSON status|message|data
+     * @route /
+     */
 
     public function listUseLog(){
 
@@ -28,6 +37,16 @@ class adminUser extends CI_Model {
 
     return $json;
     }
+
+    /**
+     * Proceso para registrar tareas. 
+     * @author Cristian Avila <?>
+     * @date 06/12/2021
+     * @method {{POST}}
+     * @param {int} id id tarea, {string} name nombre tarea {string} description descripción tarea.   
+     * @return JSON status|message|data
+     * @route /
+     */
 
 //-------------->Agregar<-----------------------------------------------------------------------------------------------------
  
@@ -64,6 +83,16 @@ class adminUser extends CI_Model {
         
     }
 
+/**
+     * Proceso para para eliminar tareas. 
+     * @author Cristian Avila <?>
+     * @date 06/12/2021
+     * @method {{POST}}
+     * @param {string} name Nombre tarea  
+     * @return JSON status|message|data
+     * @route /
+     */
+
 //-------------->Eliminar<-----------------------------------------------------------------------------------------------------
    
     public function deleteUseLog(){
@@ -79,6 +108,16 @@ class adminUser extends CI_Model {
         return;
 
     }
+
+    /**
+     * Proceso para buscar de tareas. 
+     * @author Cristian Avila <?>
+     * @date 06/12/2021
+     * @method {{POST}}
+     * @param {string} name nombre tarea.  
+     * @return JSON status|message|data
+     * @route /
+     */
 
 //-------------->search<-----------------------------------------------------------------------------------------------------
 
@@ -108,6 +147,17 @@ class adminUser extends CI_Model {
             return $json;
         }
     }
+
+    /**
+     * Proceso para tomar la información del id de la tarea y enviarselo al formulario modal. 
+     * @author Cristian Avila <?>
+     * @date 06/12/2021
+     * @method {{POST}}
+     * @param {int} id id tarea  
+     * @return JSON status|message|data
+     * @route /
+     */
+
 //-------------->Id modificar<-----------------------------------------------------------------------------------------------------
     public function modifyIdUseLog(){
 
@@ -122,6 +172,16 @@ class adminUser extends CI_Model {
             return $result;
 
     }    
+
+/**
+     * Proceso para modificar información de la tarea. 
+     * @author Cristian Avila <?>
+     * @date 06/12/2021
+     * @method {{POST}}
+     * @param {int} id id de la tarea, {string} name nombre tarea {string} description descripción tarea.
+     * @return JSON status|message|data
+     * @route /
+     */
 
     //-------------->Modificar<-----------------------------------------------------------------------------------------------------
 

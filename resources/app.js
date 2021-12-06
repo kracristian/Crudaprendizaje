@@ -25,14 +25,7 @@ $(function(){
                 fetchTasks();
             }
         });
-        e.preventDefault(); //se cayó la llamada.
-        // se me apago el cel....
-        // si me entendio ? mejor ? sí claro, mucho más de lo que estaba antes.
-        // Alguna duda adicional ? no, y
-        // pues yo voy a estar trabajando poque tengo muchas cosas por hacer... cualquier cosa m avisa, ah listos ¿puedo arreglar el de plantillas?
-        // no ponrque tengo pendiente el de documentos, un reporte que me pidieron,y el de planillas, pero en orden de prioridad esta de ultimas
-        //ah ok, ah no listos, entonces hágale, gracias. si algo le pregunto al ratón. OK
-        
+        e.preventDefault(); 
     });
 
 
