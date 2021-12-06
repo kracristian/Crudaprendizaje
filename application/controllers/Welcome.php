@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * ???
+ */
 class Welcome extends CI_Controller {
 
 	/**
@@ -8,11 +11,7 @@ class Welcome extends CI_Controller {
      * @author Cristian Avila <?>
      * @date 06/12/2021
      * @method {{POST}}
-     * @param {string} adminUser.  
-     * @return JSON status|message|data
-     * @route /
      */
-
 	function __construct()
     {   
         parent::__construct();
@@ -20,33 +19,35 @@ class Welcome extends CI_Controller {
     }
 
 	/**
-     * Paso de información vista del proyecto. 
+	 * Home -> Listado de tareas
      * @author Cristian Avila <?>
      * @date 06/12/2021
-     * @method {{POST}}
-     * @param {string} adminUser.  
-     * @return JSON status|message|data
+     * @method {{GET}}
+     * @return array Vista renderizada
      * @route /
      */
-
 	public function index()
 	{
 		$this->load->view('welcome_message');
 	}
 
 	/**
-     * Paso de información registrar tareas. 
+	 * Crear tarea
      * @author Cristian Avila <?>
      * @date 06/12/2021
      * @method {{POST}}
-     * @param {int} id id tarea, {string} name nombre tarea {string} description descripción tarea.   
+     * @param 
+	 * 		{int} id id tarea, 
+	 * 		{string} name nombre tarea 
+	 * 		{string} description descripción tarea.   
      * @return JSON status|message|data
-     * @route /
+     * @route /Welcome/add
      */
 
 	public function add() {//pasar a función agregar
 
-        $response = $this->adminUser->addUseLog();//pasar a adminUser 
+		$formdata = $this->input->post();
+        $response = $this->adminUser->addUseLog($formdata);//pasar a adminUser 
 		$jsonstring = json_encode($response);
 		echo $jsonstring;                             
 		return;
@@ -59,7 +60,7 @@ class Welcome extends CI_Controller {
      * @method {{POST}}
      * @param {string} name Nombre tarea  
      * @return JSON status|message|data
-     * @route /
+     * @route /Welcome/delete
      */
 
 	public function delete() {//pasar a función eliminar
@@ -76,7 +77,7 @@ class Welcome extends CI_Controller {
      * @method {{POST}}
      * @param {int} id id tarea  
      * @return JSON status|message|data
-     * @route /
+     * @route /Welcome/modifyId
      */
 
 	public function modifyId() {//pasar a función buscador e implementador Id modificar
@@ -93,7 +94,7 @@ class Welcome extends CI_Controller {
      * @method {{POST}}
      * @param {int} id id de la tarea, {string} name nombre tarea {string} description descripción tarea.
      * @return JSON status|message|data
-     * @route /
+     * @route /Welcome/modify
      */
 
 	public function modify() {//pasar a función modificar
@@ -112,7 +113,7 @@ class Welcome extends CI_Controller {
      * @method {{POST}}
      * @param {string} name nombre tarea.  
      * @return JSON status|message|data
-     * @route /
+     * @route /Welcome/searsh
      */
 
 	public function searsh(){//pasar a función listar 
@@ -130,7 +131,7 @@ class Welcome extends CI_Controller {
      * @method {{GET}}
      * @param {int} id id de la tarea, {string} name nombre tarea {string} description descripción tarea. 
      * @return JSON status|message|data
-     * @route /
+     * @route /Welcome/list
      */
 
 	public function list(){//pasar a función listar 

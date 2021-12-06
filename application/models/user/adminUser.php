@@ -2,7 +2,6 @@
 
 class adminUser extends CI_Model {
 
-//-------------->Listar tabla<-----------------------------------------------------------------------------------------------------
 /**
      * Proceso para listar tareas 
      * @author Cristian Avila <?>
@@ -42,18 +41,16 @@ class adminUser extends CI_Model {
      * Proceso para registrar tareas. 
      * @author Cristian Avila <?>
      * @date 06/12/2021
-     * @method {{POST}}
-     * @param {int} id id tarea, {string} name nombre tarea {string} description descripción tarea.   
-     * @return JSON status|message|data
-     * @route /
+     * @param {array} Estructura de formularrio
+     *      {int} id id tarea, 
+     *      {string} name nombre tarea 
+     *      {string} description descripción tarea.   
+     * @return array status|message|data
      */
+    public function addUseLog($formdata){
 
-//-------------->Agregar<-----------------------------------------------------------------------------------------------------
- 
-    public function addUseLog(){
-
-        $name = isset($_POST['name']) ? $_POST['name'] : '';
-        $description = isset($_POST['description']) ? $_POST['description'] : '';
+        $name = isset($formdata['name']) ? $formdata['name'] : '';
+        $description = isset($formdata['description']) ? $formdata['description'] : '';
 
         if(!$name) { return [ 'status' => 400, 'message' => 'Nombre invalido' ]; }
         if(!$description) { return [ 'status' => 400, 'message' => 'Descripcion invalido' ]; }
@@ -80,10 +77,9 @@ class adminUser extends CI_Model {
         $query = $this->db->insert('task', $data);    
                     
         return [ 'status' => 200, 'message' => 'Tarea creada','refresh' => '0' ];
-        
     }
 
-/**
+    /**
      * Proceso para para eliminar tareas. 
      * @author Cristian Avila <?>
      * @date 06/12/2021
@@ -93,8 +89,6 @@ class adminUser extends CI_Model {
      * @route /
      */
 
-//-------------->Eliminar<-----------------------------------------------------------------------------------------------------
-   
     public function deleteUseLog(){
 
         $id = isset($_POST['id']) ? $_POST['id'] : '';
@@ -103,10 +97,7 @@ class adminUser extends CI_Model {
         $this->db->delete('task');
 
         $response = [ 'status' => 200, 'message' => 'Tarea eliminada' ];
-        $jsonstring = json_encode($response);
-        echo $jsonstring;
-        return;
-
+        return $response;
     }
 
     /**
@@ -116,24 +107,16 @@ class adminUser extends CI_Model {
      * @method {{POST}}
      * @param {string} name nombre tarea.  
      * @return JSON status|message|data
-     * @route /
      */
+    public function searshUseLog(){
 
-//-------------->search<-----------------------------------------------------------------------------------------------------
+        $search = isset($_POST['search']) ? $_POST['search'] : '';
+        
 
-   // public function searshUseLog(){
-
-        $search = $_POST['search'];
-
-        if(!empty($search)){
+        
             //$sql1 = $this->db->query("'SELECT * FROM task WHERE name LIKE '%$search%'");
         
-        $sql1 = $this->db
-            ->select("*")
-            ->like('name', $search)
-            ->get("task");
-
-	        $result = $sql1->result_array();
+	        $result = $this->getTasks($search);
 
             $json = array();
             foreach ($result as $row) {
@@ -145,7 +128,18 @@ class adminUser extends CI_Model {
             } 
 
             return $json;
-        }
+    }
+
+    private function getTasks($search) {
+        if($search) { $this->db->like('name', $search); }
+
+        $sql1 = $this->db
+            ->select("*")
+            ->get("task");
+
+	        $result = $sql1->result_array();
+            return $result;
+
     }
 
     /**
@@ -155,10 +149,7 @@ class adminUser extends CI_Model {
      * @method {{POST}}
      * @param {int} id id tarea  
      * @return JSON status|message|data
-     * @route /
      */
-
-//-------------->Id modificar<-----------------------------------------------------------------------------------------------------
     public function modifyIdUseLog(){
 
         $id = isset($_POST['id']) ? $_POST['id'] : '';
@@ -182,8 +173,6 @@ class adminUser extends CI_Model {
      * @return JSON status|message|data
      * @route /
      */
-
-    //-------------->Modificar<-----------------------------------------------------------------------------------------------------
 
     public function modifyUseLog(){
         // Recibir parámertros.
