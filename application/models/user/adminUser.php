@@ -82,7 +82,7 @@ class adminUser extends CI_Model {
 
 //-------------->search<-----------------------------------------------------------------------------------------------------
 
-    public function searshUseLog(){
+   // public function searshUseLog(){
 
         $search = $_POST['search'];
 
